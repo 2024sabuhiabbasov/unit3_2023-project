@@ -314,7 +314,7 @@ This code creates a dialog box using KivyMD to notify the user that an item has 
 
 # Criteria D: Functionality
 ## A video demonstrating the proposed solution with narration
-Please find the video in [this link](https://youtu.be/HfCwjyDmsc0) to watch how the application function.
+Please find the video in [this link](https://youtu.be/XtEXtnIB8DI) to watch how the application function.
 
 [^1]: "Python." Wikipedia, Wikimedia Foundation, https://en.wikipedia.org/wiki/Python. Accessed 7 Mar. 2023.
 [^2]: "Why Choose Python." Python.org, Python Software Foundation, https://www.python.org/about/gettingstarted/. Accessed 7 Mar. 2023.
