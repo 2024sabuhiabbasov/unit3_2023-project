@@ -313,6 +313,24 @@ dialog.open()
 ```
 This code creates a dialog box using KivyMD to notify the user that an item has been successfully deleted from the database. It takes the item ID as input and displays it in the dialog box. This code is reusable in different parts of the application where a similar confirmation dialog box is needed.[^22]
 
+### General Application Screen
+```.py
+<HomeScreen>:
+    size: 500, 500 # Set the size of the screen
+
+    FitImage:
+        source: "background.png" # Set the background image
+
+    MDCard:
+        size_hint: .5, .9 # Set the size of the card
+        elevation: 2 # Set the elevation of the card 
+        orientation: "vertical" # Set the orientation of the card
+        pos_hint: {"center_x": .5, "center_y": .5} # Center the card
+        padding: dp(50) # Set the padding of the card
+        md_bg_color: "#EEE9DA" # Set the background color of the card
+```
+This code block written in Kivy language describes the visual layout of a screen called "LoginScreen" which is just one of the many screens in my application. The MDCard is a widget available in the KivyMD library that is used to display a rectangular card with round edges. This card can hold other widgets inside it. This code is used as a template for all screens in the application to ensure that they all have a similar appearance and a professional and clean aesthetic background image as requested by the client.
+
 # Criteria D: Functionality
 ## A video demonstrating the proposed solution with narration
 Please find the video in [this link](https://youtu.be/XtEXtnIB8DI) to watch how the application function.
