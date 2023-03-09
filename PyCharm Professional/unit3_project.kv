@@ -1,5 +1,3 @@
-# unit3_project.kv
-
 ScreenManager:
     LoginScreen:
         name: "LoginScreen"
@@ -171,18 +169,18 @@ ScreenManager:
                 md_bg_color: "#689ebd"
 
 <HomeScreen>:
-    size: 500, 500
+    size: 500, 500 # Set the size of the screen
 
     FitImage:
-        source: "background.png"
+        source: "background.png" # Set the background image
 
     MDCard:
-        size_hint: .5, .9
-        elevation: 2
-        orientation: "vertical"
-        pos_hint: {"center_x": .5, "center_y": .5}
-        padding: dp(50)
-        md_bg_color: "#EEE9DA"
+        size_hint: .5, .9 # Set the size of the card
+        elevation: 2 # Set the elevation of the card
+        orientation: "vertical" # Set the orientation of the card
+        pos_hint: {"center_x": .5, "center_y": .5} # Center the card
+        padding: dp(50) # Set the padding of the card
+        md_bg_color: "#EEE9DA" # Set the background color of the card
 
         MDLabel:
             id: wlcm_msg
@@ -227,6 +225,7 @@ ScreenManager:
                     md_bg_color: "#689ebd"
                     font_name: "avenir_regular.ttf"
 
+
 <NewitemScreen>:
     size: 500, 500
     FitImage:
@@ -239,18 +238,13 @@ ScreenManager:
         pos_hint: {"center_x": .5, "center_y": .5}
         md_bg_color: "#EEE9DA"
 
-        MDBoxLayout:
-            size_hint: 1, .1
-            MDLabel:
-                text: "New item"
-                font_name: "avenir_regular.ttf"
-                font_size: 30
-                size_hint: 1, 1
-                halign: "center"
-                pos_hint: {"center_x": .5, "center_y": .3}
-
         MDLabel:
-            size_hint: 1, .2
+            text: "New item"
+            font_name: "avenir_regular.ttf"
+            font_size: 30
+            size_hint: 1, .1
+            halign: "center"
+            pos_hint: {"center_x": .5, "center_y": .3}
 
         MDBoxLayout:
             orientation: "vertical"
@@ -265,14 +259,13 @@ ScreenManager:
                 helper_text_mode: "on_error"
                 helper_text: "Customer ID must be a number"
 
-            MDTextField:
-                id: date
-                hint_text: "Date"
-                icon_left: "calendar"
-                multiline: False
-                on_text_validate: root.validate_date(self.text)
-                helper_text_mode: "on_error"
-                helper_text: "Date must be in this format: dd-mm-YYYY"
+            MDRectangleFlatButton:
+                id: date_picker
+                text: "Pick a date"
+                on_release: root.show_date_picker()
+                size_hint: 1, 1
+                line_color: "#1183ad"
+                text_color: "#1183ad"
 
             MDTextField:
                 id: item
@@ -280,14 +273,31 @@ ScreenManager:
                 icon_left: "shopping"
                 helper_text_mode: "on_error"
                 helper_text: "Item must be one of these:\nSki, Snowboard, Ski shoes, Snowboard boots,\nSki clothes, Snowboard clothes"
+            
+            MDBoxLayout:
+                orientation: "vertical"
+                pos_hint: {"center_x": .5, "center_y": .5}
 
-            MDTextField:
-                id: size
-                hint_text: "Size"
-                icon_left: "resize"
-                on_text_validate: root.validate_size(self.text)
-                helper_text_mode: "on_error"
-                helper_text: "Size must be a number"
+                MDLabel:
+                    id: size_label
+                    text: "Size: " + str(size.value)
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    pos_hint: {"center_x": .5, "center_y": .5}
+
+                MDSlider:
+                    id: size
+                    min: 16.5
+                    max: 180
+                    step: 0.5
+                    hint: "Size"
+                    icon: "resize"
+                    size_hint_y: 1
+                    humb_color_down: app.theme_cls.accent_color
+                    hint_bg_color: "white"
+                    helper_text_mode: "on_error"
+                    helper_text: "Size must be a number"
+                    pos_hint: {"center_x": .5, "center_y": .5}
 
             MDTextField:
                 id: item_id

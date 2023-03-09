@@ -4,8 +4,9 @@ import sqlite3
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.menu import MDDropdownMenu
 from passlib.context import CryptContext
-
+from kivymd.uix.pickers import MDDatePicker
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 
@@ -13,6 +14,7 @@ import email_validator
 import re
 from datetime import datetime
 
+# Password hashing
 pwd_config = CryptContext(schemes=["pbkdf2_sha256"],
                           default="pbkdf2_sha256",
                           pbkdf2_sha256__default_rounds=30000
@@ -27,7 +29,7 @@ def check_password(hashed_password, user_password):
     return pwd_config.verify(user_password, hashed_password)
 
 # Class for handling login and signup database operations
-class database_handler_login_signup(MDApp):
+class database_handler_login_signup():
     def __init__(self, namedb: str):
         self.connection = sqlite3.connect(namedb)
         self.cursor = self.connection.cursor()
@@ -66,7 +68,7 @@ class database_handler_login_signup(MDApp):
         self.run_query(query)
 
 # Class for handling item database operations
-class database_handler_items(MDApp):
+class database_handler_items():
     def __init__(self, namedb: str):
         self.connection = sqlite3.connect(namedb)
         self.cursor = self.connection.cursor()
@@ -106,12 +108,8 @@ class database_handler_items(MDApp):
         self.cursor.execute(query)
         self.connection.commit()
 
+# Class for handling the LoginScree
 class LoginScreen(MDScreen):
-    # Define the __init__ method that initializes the object
-    def __init__(self, **kwargs):
-        # Call the parent class's __init__ method with any keyword arguments
-        super(LoginScreen, self).__init__(**kwargs)
-
     # Define a method that handles login attempts
     def try_login(self):
         # Get the email and password entered by the user
@@ -170,6 +168,7 @@ class LoginScreen(MDScreen):
     def build(self):
         return None
 
+# Class for handling the SignupScreen
 class SignupScreen(MDScreen):
     def validate_email(self, email):
         try:
@@ -208,12 +207,19 @@ class SignupScreen(MDScreen):
         if not self.validate_email(email):
             # Show error message if email is invalid
             self.ids.email.error = True
+            self.ids.email.helper_text_mode = "on_error"
+            self.ids.email.helper_text = "Invalid email"
             return
 
         if not passwd1 or not passwd2:
-            dialog = MDDialog(title="Empty Password",
-                              text="Password fields cannot be empty.")
-            dialog.open()
+            if not passwd1:
+                self.ids.e_passwd.error = True
+                self.ids.e_passwd.helper_text_mode = "on_error"
+                self.ids.e_passwd.helper_text = "Password cannot be empty"
+            else:
+                self.ids.c_passwd.error = True
+                self.ids.c_passwd.helper_text_mode = "on_error"
+                self.ids.c_passwd.helper_text = "Password cannot be empty"
             return
 
         pattern = r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+]).{8,}$'
@@ -221,6 +227,8 @@ class SignupScreen(MDScreen):
         # Check if the password matches the pattern
         if not re.match(pattern, passwd1):
             self.ids.e_passwd.error = True
+            self.ids.e_passwd.helper_text_mode = "on_error"
+            self.ids.e_passwd.helper_text = "Password doesn't meet the requirements"
             dialog = MDDialog(title="Password doesn't meet the requirements",
                               text="The password entered must be:\n- At least 8 characters,\n- One capital letter,\n- One lowercase letter,\n- One symbol: !@#$%^&*()_+")
             dialog.open()
@@ -230,9 +238,10 @@ class SignupScreen(MDScreen):
         if passwd1 != passwd2:
             self.ids.e_passwd.error = True
             self.ids.c_passwd.error = True
-            dialog = MDDialog(title="Password mismatch",
-                              text="The passwords entered do not match.")
-            dialog.open()
+            self.ids.e_passwd.helper_text_mode = "on_error"
+            self.ids.c_passwd.helper_text_mode = "on_error"
+            self.ids.e_passwd.helper_text = "Passwords don't match"
+            self.ids.c_passwd.helper_text = "Passwords don't match"
             return
 
         # Insert the new user into the database and change the current screen to LoginScreen.
@@ -255,6 +264,7 @@ class SignupScreen(MDScreen):
         self.ids.e_passwd.password = not self.show_password
         self.ids.c_passwd.password = not self.show_password
 
+# Class for handling the HomeScreen
 class HomeScreen(MDScreen):
 
     # Function to log out the user
@@ -266,15 +276,16 @@ class HomeScreen(MDScreen):
             buttons=[
                 MDFlatButton(
                     text="Yes",
-                    on_release=self.log_out_user
+                    on_release=self.log_out_user # Call the log_out_user function when the button is pressed
                 ),
                 MDFlatButton(
                     text="No",
-                    on_release=self.dismiss_dialog
+                    on_release=self.dismiss_dialog # Call the dismiss_dialog function when the button is pressed
                 ),
             ],
         )
-        self.sign_out_confirmation_dialog.open()
+        self.sign_out_confirmation_dialog.open() # Open the dialog
+
 
     def log_out_user(self, instance):
         # Perform the signout actions
@@ -293,19 +304,19 @@ class HomeScreen(MDScreen):
     def build(self):
         return
 
+# Class for handling the NewitemScreen
 class NewitemScreen(MDScreen):
-    input_format = "%d-%m-%Y" # input format for date text field
 
-    def validate_date(self, text):
-        """
-        Validate the entered date
-        """
-        # Check if the entered text is a valid date in the specified format
-        try:
-            datetime.strptime(text, self.input_format)
-            print("Valid date entered!")
-        except ValueError:
-            self.ids.date.error = True
+    def show_date_picker(self):
+        calendar = MDDatePicker()
+        calendar.bind(on_save=self.get_date)
+        calendar.open()
+        
+    def get_date(self, instance, date, date_range):
+        date = date.strftime("%d-%m-%Y")
+        self.ids.date_picker.text = str(date)
+    
+    input_format = "%d-%m-%Y" # input format for date text field
 
     def validate_customer_id(self, text):
         """
@@ -315,15 +326,6 @@ class NewitemScreen(MDScreen):
             customer_id = int(text)
         except ValueError:
             self.ids.customer_id.error = True
-
-    def validate_size(self, text):
-        """
-        Validate the size entered in "size" MDTextField.
-        """
-        try:
-            size = float(text)
-        except ValueError:
-            self.ids.size.error = True
 
     def validate_item_id(self, text):
         """
@@ -338,7 +340,7 @@ class NewitemScreen(MDScreen):
         # Create a database handler object
         db_items = database_handler_items(namedb="unit3_project_database.db")
         # Insert the new item into the database
-        db_items.insert(self.ids.customer_id.text, self.ids.date.text, self.ids.item.text, self.ids.size.text, self.ids.item_id.text)
+        db_items.insert(self.ids.customer_id.text, self.ids.date_picker.text, self.ids.item.text, self.ids.size.value, self.ids.item_id.text)
         print("Item added")
 
         # Create and open the alert dialog to confirm item has been added
@@ -349,9 +351,10 @@ class NewitemScreen(MDScreen):
 
         # Clear the input fields and switch to HomeScreen
         self.ids.customer_id.text = ""
-        self.ids.date.text = ""
+        self.ids.date_picker.text = "Pick a date"
         self.ids.item.text = ""
-        self.ids.size.text = ""
+        self.ids.size.value = 16.5
+        self.ids.size_label.text = "16.5"
         self.ids.item_id.text = ""
         self.parent.current= 'HomeScreen'
 
@@ -359,14 +362,16 @@ class NewitemScreen(MDScreen):
         # Clear the input fields and switch to HomeScreen
         self.parent.current = 'HomeScreen'
         self.ids.customer_id.text = ""
-        self.ids.date.text = ""
+        self.ids.date_picker.text = "Pick a date"
         self.ids.item.text = ""
-        self.ids.size.text = ""
+        self.ids.size.value = 16.5
+        self.ids.size_label.text = "16.5"
         self.ids.item_id.text = ""
 
     def build(self):
         return
 
+# Class for handling the BorrowedItemsScreen
 class BorrowedItemsScreen(MDScreen):
     # class_variable
     data_table = None
@@ -424,18 +429,23 @@ class BorrowedItemsScreen(MDScreen):
         # Function to handle when a check mark is pressed
         print("a check mark was pressed", current_row)
 
+# Class to run the application
 class unit3_project(MDApp):
     def build(self):
         return
 
-db = database_handler_login_signup(namedb="unit3_project_database.db")
-db.create_table()
+db = database_handler_login_signup(namedb="unit3_project_database.db") # Create a database handler object
+db.create_table() # Create the table
+print("Database created") # Print a message to the console that the database has been created
 
-db_items = database_handler_items(namedb="unit3_project_database.db")
-db_items.create_table()
+db_items = database_handler_items(namedb="unit3_project_database.db") # Create a database handler object
+db_items.create_table() # Create the table
+print("Database created") # Print a message to the console that the database has been created
 
-test = unit3_project()
-test.run()
+test = unit3_project() # Create an object of the application
+test.run() # Run the application
+print("App running") # Print a message to the console that the application is running
 
-db.close()
-db_items.close()
+db.close() # Close the database
+db_items.close() # Close the database
+print("Database closed") # Print a message to the console that the database has been closed
