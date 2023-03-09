@@ -84,11 +84,11 @@ In the diagram, each class is represented by a rectangle containing the class na
 ## Test Plan
 | Description | Type | Inputs | Outputs | 
 | ----------- | ---- | ------ | ------- |
-Test if signup page works	|	Functional: Integration testing	|	Press "Sign up", use "j" for all text fields. Press "Submit".	|	Should bring to login screen
-Test if login page works	|	Functional: Integration testing	|	Enter "j" for email and password. Press "Login".	|	Should bring the user to Homescreen
-Testing if adding new item works	|	Functional: Integration testing	|	Enter 1, 03-02-2023, Ski, 170, 10987, respectively to the fields customer_id, date, item, size, item_id. Press submit.	|	Should pop up a dialog saying that the item ID: 10987 added to the borrowed items list.
+Test if signup page works	|	Functional: Integration testing	|	1. "Sign up", 2, Oswell, 2024.oswell.taiga.sakaguchi@uwcisak.jp, Oswell123@4 for password text fields, 3. Press "Submit".	|	Should bring to login screen
+Test if login page works	|	Functional: Integration testing	|	1. Enter 2024.oswell.taiga.sakaguchi@uwcisak.jp, Oswell123@4, 2. Press "Login".	|	Should bring the user to Homescreen
+Testing if adding new item works	|	Functional: Integration testing	|	1. Enter 1, 03-02-2023, Ski, 170, 10987, respectively to the fields customer_id, date, item, size, item_id, 2. Press submit.	|	Should pop up a dialog saying that the item ID: 10987 added to the borrowed items list.
 Check if code has good comments, variable and method names	|	Non-functional: Code review	|	N/A	|	The code should contain comments, good variable and method names.
-Check if table shows the correct data	|	Non-functional: Load testing	|	Login, go to Borrowed Items screen.	|	The table should have the exact data as in database.
+Check if table shows the correct data	|	Non-functional: Load testing	|	1. Login, 2. Go to Borrowed Items screen.	|	The table should have the exact data as in database.
 
 ## Record of Tasks
 | Task No | Planned Action                                                | Planned Outcome                                                                                                 | Time estimate | Target completion date | Criterion |
@@ -131,6 +131,7 @@ Check if table shows the correct data	|	Non-functional: Load testing	|	Login, go
 36	|	Create existing tools list	|	A list of tools used during the development of the app.	|	15 mins.	|	3/2/2023	|	C
 37	|	Record and upload a video of max. 4 min. length, presenting the application.	|	A video, showing how the application functions. Last 30 seconds should be focused on well-organization of code.	|	10 mins.	|	3/2/2023	|	D
 38	|	Finish Criteria C	|	Adding different parts of my development of the app	|	30 mins.	|	3/4/2023	|	C
+39	|	Finish Ciatations	|	Ciatations for resources used throughout the development of my solution	|	30 mins.	|	3/7/2023	|	C
 
 # Criteria C: Development
 
