@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/111758436/223108477-b163d5cb-9ef6-40e0-a2eb-37b09f3c9167.png)
 <p align='center'>
-<i>Ski / Snowboard Rental, AI generated drawing (Pormpt: 3-4 skis on a table with ski equipment (shoes, etc.) table should be wood, and ski colors: green/blue, aesthetic drawing)</i>
+<i>Ski / Snowboard Rental, AI generated drawing (Prompt: 3-4 skis on a table with ski equipment (shoes, etc.) table should be wood, and ski colors: green/blue, aesthetic drawing)</i>
 </p>
 
 # Criteria A: Planning
