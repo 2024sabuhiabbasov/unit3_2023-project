@@ -57,15 +57,12 @@ In the sign-up page, the user can either press "register" to complete the regist
 In the thank you page, the user is given the option to either go back to the homepage or view the list of borrowed items. Overall, the user interface is designed to be user-friendly and intuitive, making it easy for users to navigate and perform tasks.[^17]
 
 ## Flow diagram
-### Flow diagram for create_table (database_handler_login_signup class)
 ![create_table](https://user-images.githubusercontent.com/111758436/223089660-e5c17f9a-dcd4-47d1-af44-1da7bfb9e726.jpeg)
 <i>Figure 3</i> - The flow diagram for the create_table method of the database_handler_login_signup class is shown in Figure 3. This method is used to create a table with the name "users" that contains four columns, namely email, username, password, and user_type. This table is created only when the program is run for the first time, and if the table already exists, the method does not create a new table. The create_table method is an essential part of the database_handler_login_signup class as it sets up the necessary table for the program to function correctly.[^19]
 
-### Flow diagram for try_login (LoginScreen class)
 ![flowchart_try_login](https://user-images.githubusercontent.com/111758436/223086624-3710e2b7-e578-49c3-a7e0-57b8c11a8c8b.jpeg)
 <i>Figure 4</i> - The try_login method of the LoginScreen class is used to authenticate the user's login credentials. It takes in the user's email and password as input, and then retrieves the hashed password from the "users" table in the database using the get_password_from_email() method from the database_handler_login_signup class. The try_login method is a crucial part of the LoginScreen class as it ensures that only authorized users are granted access to the application's features.[^19]
 
-### Flow diagram for on_pre_enter (BorrowedItemsScreen class)
 ![on_pre_enter](https://user-images.githubusercontent.com/111758436/223086666-866c604d-aa3d-4974-8d3e-1528603271f5.jpeg)
 <i>Figure 5</i> - The on_pre_enter method of the BorrowedItemsScreen class is a crucial function that is triggered when the user clicks the "BorrowedItemsScreen" button to view a list of borrowed items. As demonstrated in Figure 5, this method updates the displayed table each time it is run to ensure that the user is presented with the most current information from the database. on_pre_enter method of the BorrowedItemsScreen class is instrumental in providing the user with a smooth and up-to-date experience when interacting with the application.[^19]
 
