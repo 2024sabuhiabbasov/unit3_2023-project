@@ -327,6 +327,11 @@ This code creates a dialog box using KivyMD to notify the user that an item has 
 ```
 This code block written in Kivy language describes the visual layout of a screen called "LoginScreen" which is just one of the many screens in my application. The MDCard is a widget available in the KivyMD library that is used to display a rectangular card with round edges. This card can hold other widgets inside it. This code is used as a template for all screens in the application to ensure that they all have a similar appearance and a professional and clean aesthetic background image as requested by the client.
 
+### Organizing elements using MDBoxLayout using KivyMD
+```.kv
+
+```
+
 # Criteria D: Functionality
 ## A video demonstrating the proposed solution with narration
 
