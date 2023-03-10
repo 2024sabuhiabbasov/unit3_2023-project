@@ -329,8 +329,32 @@ This code block written in Kivy language describes the visual layout of a screen
 
 ### Organizing elements using MDBoxLayout using KivyMD
 ```.kv
+MDBoxLayout:
+            orientation: "horizontal" # Set the orientation of the box layout
+            size_hint: .7, .1 # Set the size of the box layout
+            pos_hint: {"center_x": .5, "center_y": .5} # Center the box layout
 
+            MDRaisedButton:
+                font_name: "avenir_regular.ttf" # Set the font of the button
+                id: newitem_cancel # Set the id of the button
+                text: "Cancel" # Set the text of the button to "Cancel"
+                on_press: root.try_cancel() # Use the try_cancel function when the button is pressed
+                size_hint: .35, .7 # Set the size of the button to 35 percent of the width and 70 percent of the height
+                md_bg_color: "#689ebd" # Set the background color of the button
+
+            MDLabel: # Create a label for spacing
+                size_hint: .3, 1 # Set the size of the label to 30 percent of the width and 100 percent of the height
+                halign: "center" # Center the text of the label
+
+            MDRaisedButton:
+                font_name: "avenir_regular.ttf" # Set the font of the button
+                id: newitem_submit # Set the id of the button
+                text: "Submit" # Set the text of the button to "Submit"
+                on_press: root.try_add() # Use the try_add function when the button is pressed
+                size_hint: .35, .7 # Set the size of the button to 35 percent of the width and 70 percent of the height
+                md_bg_color: "#689ebd" # Set the background color of the button
 ```
+The MDBoxLayout in this code is a widget from the KivyMD library that arranges its child widgets horizontally. The size_hint attribute determines the relative size of the layout compared to its parent widget which is the add new item screen, and the pos_hint attribute determines its position. The MDRaisedButton and MDLabel widgets are added as child widgets of the MDBoxLayout.
 
 # Criteria D: Functionality
 ## A video demonstrating the proposed solution with narration
