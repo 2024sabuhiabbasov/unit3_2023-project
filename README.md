@@ -164,16 +164,15 @@ Check if table shows the correct data	|	Non-functional: Load testing	|	1. Login,
 In order to ensure a well-organized structure for the item details in the table, validation for each input is necessary. This approach provides a systematic way of organizing the data and ensures that only valid inputs are stored in the table.
 #### Validating
 ```.py
-def validate_date(self, text):
-    """
-    Validate the entered date
-    """
-    # Check if the entered text is a valid date in the specified format
+# Validate the email using the email_validator module
+def validate_email(self, email):
     try:
-        datetime.strptime(text, self.input_format)
-        print("Valid date entered!")
-    except ValueError:
-        self.ids.date.error = True.
+        # If the email is valid, return True
+        email_validator.validate_email(email)
+        return True
+    except:
+        # If the email is invalid, return False
+        return False
 ```
 The code above illustrates the method used to validate input fields. This validation structure is implemented for each text field in the application to ensure data accuracy and consistency.[^8]
 
