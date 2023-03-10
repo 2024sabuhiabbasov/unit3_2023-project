@@ -332,7 +332,10 @@ This code block written in Kivy language describes the visual layout of a screen
 
 # Criteria D: Functionality
 ## A video demonstrating the proposed solution with narration
-Please find the video in [this link](https://youtu.be/XtEXtnIB8DI) to watch how the application function.
+
+https://user-images.githubusercontent.com/111758436/224220242-af066e28-8b9c-4fc5-bbb9-0820e3e085ac.mp4
+
+Please find the exact video in [this link](https://youtu.be/XtEXtnIB8DI) to watch how the application function with live captions.
 
 [^1]: "Python." Wikipedia, Wikimedia Foundation, https://en.wikipedia.org/wiki/Python. Accessed 7 Mar. 2023.
 [^2]: "Why Choose Python." Python.org, Python Software Foundation, https://www.python.org/about/gettingstarted/. Accessed 7 Mar. 2023.
